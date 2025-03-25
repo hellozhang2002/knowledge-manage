@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,Chrome=1">
+		<meta name="renderer" content="webkit">
+		<!--国产浏览器高速模式-->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<!-- 定义页面的最新版本 -->
+		<!-- 网站简介 -->
+		<meta name="keywords" content="搜索关键字，以半角英文逗号隔开" />
+		<!-- 搜索关键字 -->
+		<title>知识管理</title>
+		<!-- 基础样式文件 开始 -->
+		<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+		<link href="css/base.css" rel="stylesheet" type="text/css">
+		<link href="css/index.css" rel="stylesheet" type="text/css">
+		<!-- 基础样式文件结束 -->
+		<!-- 基础JS文件 开始 -->
+		<script type="text/javascript" src="js/jquery-1.10.2.min.js"></script>
+		<script type="text/javascript" src="js/base.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript">
+			
+			function loadData(url, cFunction) {
+			  var xmr;
+			  xmr = new XMLHttpRequest();
+			  xmr.onreadystatechange = function() {
+			    if (this.readyState == 4 && this.status == 200) {
+			      cFunction(this);
+			    }
+			  };
+			  xmr.open("GET", url, true);
+			  xmr.send();
+			}
+			function depRank(xmr) {
+			  // 行动在这里
+			  console.log(xmr.responseText)
+			  document.getElementById("DepRank").innerHTML = xmr.responseText;
+			 } 
+			function personRank(xmr) {
+			  // 行动在这里
+			  document.getElementById("PersonRank").innerHTML = xmr.responseText;
+			 } 
+			function managerState(xmr) {
+			  // 行动在这里
+			  document.getElementById("ManagerState").innerHTML = xmr.responseText;
+			 } 
+			function newKnowledge(xmr) {
+			  // 行动在这里
+			  document.getElementById("Newknowledge").innerHTML = xmr.responseText;
+			 } 
+		window.onload=function updateIndex(){
+			loadData("js/updateindex.ashx?lb=DepRank", depRank);
+ 			loadData("js/updateindex.ashx?lb=PersonRank", personRank);
+			loadData("js/updateindex.ashx?lb=ManagerState", managerState);
+			loadData("js/updateindex.ashx?lb=Newknowledge", newKnowledge); 
+		}
+		</script>
+
+		<!-- 基础JS文件 结束 -->
+	</head>
+
+	<body>
+	<!-- main 开始 -->
+		<div class="main">
+			<div class="main_box">
+<!-- 				<div class="logo_top">
+					<span><a href="">登录</a></span>
+					<span><a href="http://192.168.9.94/CommonModel/CommonTree/WebUI/Index.aspx?TreeCode=KMS_Knowledge_tree_KEdit&RootID=&ReplaceCode=" target="_blank">管理入口</a></span>
+				</div> -->
+				<!-- logo 开始 -->
+				<div class="logo">
+				 <span>首钢工程知识管理</span>
+				</div>
+				<!-- logo 结束 -->
+	
+				<!-- banner 开始 -->
+				<div class="banner">
+					<ul>
+						<li class="right_border"><a href="index.html">首页</a></li>
+						<li class="right_border"><a href="http://192.168.9.94/">公司首页</a></li>
+						<li class="right_border"><a href="#">个人平台</a></li>
+<!-- 						<li class="right_border"><a href="">专题知识</a></li> -->
+						<li class="right_border"><a href="km-map.html">知识地图</a></li>
+<!-- 						<li class="right_border"><a href="">知识社区</a></li>
+						<li class="right_border"><a href="">知识问答</a></li> -->
+						<li class="right_border"><a href="">个人中心</a></li>
+					</ul>
+				</div>
+				<!-- banner 结束 -->
+	
+				<!-- 搜索与登录 开始 -->
+				<div class="search_wx">
+	
+					<div class="search">
+						<form action="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html" method="get" name="search" target="_blank">
+						<span>查询内容:</span>
+						<input name="ExpandCode" type="hidden" value="KMS_search" />
+						<select name="searchType" class="select1" aria-label="Default select example">
+						  <option value="abscure">所有</option>
+						  <option value="title" selected>标题</option>
+						  <option value="author">作者</option>
+						  <option value="abstract">摘要</option>
+						  <option value="keyword">关键词</option>
+						</select>
+
+						<input name="searchContent" class="text" type="text"  placeholder="请输入搜索内容"/>
+						<button  type="submit" class="button btn btn-light">搜索</button>
+						<button  type="button" class="button btn btn-light">高级搜索</button>
+	<!-- 					<a href="" class="button btn btn-light">高级搜索</a> -->
+						</form>
+				
+					</div>
+					<!-- <div class="wx">
+						<button class="button1 btn btn-primary" >登录</button>
+					</div> -->
+				</div>
+				<!-- 搜索与登录 结束 -->
+	
+				<!-- 主体开始 -->
+				<div class="news">
+					<div class="news_box1">
+						<div class="news_tzgg">
+							
+							<div class="news_tzgg_title">
+								<font>部门排名</font><span></span>
+							</div>
+							<div class="news_tzgg_content">
+								<ul>
+									<li style="margin: 0px  30px;">
+										<font>部门名称</font> <font style="margin-left: 120px;">知识总量</font>
+									</li>
+								</ul>
+								<ul id="DepRank">
+
+								</ul>
+							</div>
+
+
+							<div class="news_tzgg_title">	
+								<font>个人排名</font><span></span>
+							</div>
+							<div class="news_tzgg_content">
+								<ul>
+									<li style="margin: 0px  30px;">
+										<font>个人姓名</font> <font style="margin-left: 120px;">知识总量</font>
+									</li>
+								</ul>
+								<ul id="PersonRank">
+	
+								</ul>
+							</div>
+						
+						<div class="news_tzgg_title">
+								<font>管理动态</font>
+							</div>
+							<div class="news_tzgg_content">
+								<ul id="ManagerState">
+
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="news_box2">
+						<div class="news_jfxw">
+						<!-- 知识分类 -->
+						<div class="news_jfxw_title">
+							<font>分类检索</font>
+						</div>
+						 <div class="news_jfxw_content"> 
+						<table class="table caption-top">
+						  <thead>
+						    <tr>
+						      <th scope="col" colspan="5"><img class="img_dt" src="img/index/zykdh_ico19.png">产生来源</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr >
+							  <td></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=市场开发" target="_blank"><img  class="img_dt" src="img/index/hot_list_ico1.png">市场开发</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=运营管理" target="_blank"><img  class="img_dt" src="img/index/hot_list_ico1.png">运营管理</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=战略技术" target="_blank"><img class="img_dt"  src="img/index/hot_list_ico1.png">战略技术</a></td>
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=组织人事" target="_blank"><img class="img_dt"  src="img/index/hot_list_ico1.png">组织人事</a></td>
+							</tr>
+						    <tr>
+							 <td></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=市场营销" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">市场营销</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=工程管理" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">工程管理</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=炼钢" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">炼钢</a></td>
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=炼铁" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">炼铁</a></td>
+						    </tr>
+						    <tr>
+							  <td></td>	
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=球团" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">球团</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=海水淡化" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">海水淡化</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=制氧" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">制氧</a></td>
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=焦化" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">焦化</a></td>
+						    </tr>
+							</tbody>
+						</table>
+						<table class="table caption-top">
+						  <thead>
+						    <tr>
+						      <th scope="col" colspan="5"><img class="img_dt" src="img/index/zykdh_ico16.png">专业领域</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+							  <td></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=财务" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">财务</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=人力资源" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">人力资源</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=项目管理" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">项目管理</a></td>
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=信息化" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">信息化</a></td>
+							</tr>
+						    <tr>
+							 <td></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=文号宣传" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">文化宣传</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=冶金工程" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">冶金工程</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=建筑" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">建筑</a></td>
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=电力" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">电力</a></td>
+						    </tr>
+						    <tr>
+							  <td></td>	
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=机械" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">机械</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=技术经济" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">技术经济</a></td>
+						      <td></td>
+							  <td></td>
+						    </tr>
+							</tbody>
+						</table>
+						<table class="table caption-top">
+						  <thead>
+						    <tr>
+						      <th scope="col" colspan="5"><img class="img_dt" src="img/index/zykdh_ico13.png">知识内容</th>
+						    </tr>
+						  </thead>
+						  <tbody>
+						    <tr>
+							  <td></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=制度" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">制度</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=标准" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">标准</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=专利" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">专利</a></td>
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=论文" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">论文</a></td>
+							</tr>
+						    <tr>
+							 <td></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=著作权" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">著作权</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=获奖" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">获奖</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=处罚" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">处罚</a></td>
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=会议纪要" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">会议纪要</a></td>
+						    </tr>
+						    <tr>
+							  <td></td>	
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=公司报告" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">公司报告</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=课题研究报告" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">课题研究报告</a></td>
+						      <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=可行性分析报告" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">可行性分析报告</a></td>
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=初步设计方案" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">初步设计方案</a></td>
+						    </tr>
+							<tr>
+							  <td></td>	
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=投标书" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">投标书</a></td>
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=招标文件" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">招标文件</a></td>
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=项目总结" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">项目总结</a></td>
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=质量手册" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">质量手册</a></td>
+							</tr>
+							<tr>
+							  <td></td>	
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=图纸" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">图纸</a></td>
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=计算书" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">计算书</a></td>
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=项目过程文件" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">项目过程文件</a></td>
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=合同" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">合同</a></td>
+							</tr>
+							<tr>
+							  <td></td>	
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=信息系统用户手册" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">信息系统用户手册</a></td>
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=会议资料" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">会议资料</a></td>
+							  <td><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=培训资料" target="_blank"><img class="img_dt" src="img/index/hot_list_ico1.png">培训资料</a></td>
+							  <td><a href=""></a></td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+
+									
+						<!-- 知识地图结束 -->
+							<div class="news_jfxw_title">
+								<font>最新知识</font><span><a href="">更多</a></span>
+							</div>
+							<div class="news_jfxw_content" >
+
+								<table class="table caption-top">
+								  <thead>
+								    <tr>
+								      <th scope="col">#</th>
+								      <th scope="col">知识名称</th>
+								      <th scope="col">作者</th>
+								      <th scope="col">发表日期</th>
+									  <th scope="col">浏览数</th>
+									  <th scope="col">下载数</th>
+								    </tr>
+								  </thead>
+								  <tbody id ="Newknowledge">
+
+								  </tbody>
+								</table>
+							</div>
+						</div>
+
+					</div>
+					<div class="news_box3">
+
+						<div class="news_wzdh">
+							<div class="news_gwzx_title">   <!-- news_wzdh_title -->
+								<font>专题知识</font>
+							</div>
+							<div style="margin-top: 20px;">
+								  <button class="btn btn-outline-secondary" style="width: 100%;" type="button" data-bs-toggle="collapse" data-bs-target="#coll1" aria-expanded="false" aria-controls="coll1">
+								    新员工专区
+								  </button>
+							</div>
+							<div class="collapse show" id="coll1">
+							  <div class="card card-body">
+							   <table class="table caption-top">
+							   	<tr>
+							   	<td scope="col"></td>
+							   		<td ><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=考勤" target="_blank"><img class="img_dt" src="img/index/hot_list_ico.png">考勤</a></td>
+									<td ><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=请假" target="_blank"><img class="img_dt" src="img/index/hot_list_ico.png">请假</a></td>
+									<td ><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=报销" target="_blank"><img class="img_dt" src="img/index/hot_list_ico.png">报销</a></td>
+							   	</tr>
+							   	<tr>
+							   		<td class="col"></td> 
+							   		<td ><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=福利" target="_blank"><img class="img_dt" src="img/index/hot_list_ico.png">福利</a></td>
+									<td ><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=工会" target="_blank"><img class="img_dt" src="img/index/hot_list_ico.png">工会</a></td>
+									<td ><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=党团" target="_blank"><img class="img_dt" src="img/index/hot_list_ico.png">党团</a></td>
+							   	</tr>
+							   </table>
+							  </div>
+							</div>
+						<div style="margin-top: 10px;">
+							  <button class="btn btn-outline-secondary" style="width: 100%;" type="button" data-bs-toggle="collapse" data-bs-target="#coll2" aria-expanded="false" aria-controls="coll2">
+							    工程管理专区
+							  </button>
+						</div>
+						<div class="collapse" id="coll2">
+						  <div class="card card-body">
+						   <table class="table caption-top">
+						   	<tr>
+						   	<td scope="col"></td>
+						   		<td ><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=立项决策" target="_blank"><img class="img_dt" src="img/index/hot_list_ico.png">立项决策</a></td>
+								<td ><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=设计管理" target="_blank"><img class="img_dt" src="img/index/hot_list_ico.png">设计管理</a></td>
+						   	</tr>
+						   	<tr>
+						   		<td class="col"></td> 
+								<td ><a href=""><img class="img_dt" src="img/index/hot_list_ico.png">采购管理</a></td>								
+						   		<td ><a href=""><img class="img_dt" src="img/index/hot_list_ico.png">项目实施</a></td>
+						   	</tr>
+							<tr>
+								<td class="col"></td>
+								<td ><a href=""><img class="img_dt" src="img/index/hot_list_ico.png">竣工验收</a></td>								
+								<td ><a href=""><img class="img_dt" src="img/index/hot_list_ico.png">文档管理</a></td> 
+							</tr>
+							<tr>
+								<td class="col"></td>
+								<td ><a href=""><img class="img_dt" src="img/index/hot_list_ico.png">后期评价</a></td>
+								<td ></td>
+							</tr>							
+						   </table>
+						  </div>
+						</div>
+						<div style="margin-top: 10px;">
+							  <button class="btn btn-outline-secondary" style="width: 100%;" type="button" data-bs-toggle="collapse" data-bs-target="#coll3" aria-expanded="false" aria-controls="coll3">
+							    BIM知识专区
+							  </button>
+						</div>
+						<div class="collapse" id="coll3">
+						  <div class="card card-body">
+						   <table class="table caption-top">
+						   	<tr>
+						   	<td scope="col"></td>
+						   		<td ><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=理论知识" target="_blank"><img class="img_dt" src="img/index/hot_list_ico.png">理论知识</a></td>
+								<td ><a href="http://192.168.9.94/System/SJYFD/weixin-pack/searchapp/index.html?ExpandCode=KMS_search&searchType=abscure&searchContent=软件知识" target="_blank"><img class="img_dt" src="img/index/hot_list_ico.png">软件知识</a></td>
+						   	</tr>
+						   	<tr>
+						   		<td class="col"></td>
+								<td ><a href=""><img class="img_dt" src="img/index/hot_list_ico.png">实际案例</a></td>								 
+						   		<td ><a href=""><img class="img_dt" src="img/index/hot_list_ico.png">市场前景</a></td>
+						   	</tr>
+						   </table>
+						  </div>
+						</div>
+						<div style="margin-top: 10px;">
+							  <button class="btn btn-outline-secondary" style="width: 100%;" type="button" data-bs-toggle="collapse" data-bs-target="#coll4" aria-expanded="false" aria-controls="coll4">
+							    科技管理专区
+							  </button>
+						</div>
+						<div class="collapse" id="coll4">
+						  <div class="card card-body">
+						   <table class="table caption-top">
+						   	<tr>
+						   	<td scope="col"></td>
+						   		<td ><a href=""><img class="img_dt" src="img/index/hot_list_ico.png">科技开发</a></td>
+								<td ><a href=""><img class="img_dt" src="img/index/hot_list_ico.png">产权管理</a></td>
+						   	</tr>
+						   	<tr>
+						   		<td class="col"></td>
+								<td ><a href=""><img class="img_dt" src="img/index/hot_list_ico.png">科技保密</a></td>								 
+						   		<td ><a href=""><img class="img_dt" src="img/index/hot_list_ico.png">战略规划</a></td>
+						   	</tr>
+						   	<tr>
+						   		<td class="col"></td>
+								<td ><a href=""><img class="img_dt" src="img/index/hot_list_ico.png">体系与资质</a></td>								 
+						   		<td ><a href=""><img class="img_dt" src="img/index/hot_list_ico.png">质量管理</a></td>
+						   	</tr>
+						   </table>
+						  </div>
+						</div>
+							
+					<!-- 		<div class="news_gwzx" style="margin-top: 10px;">
+								<div class="news_gwzx_title">
+									<font>知识百科</font>
+								</div>
+								<div class="news_gwzx_content">
+									<ul>
+										<li><a href="">关于更新系统后台数据库的通知</a><span>05-20</span></li>
+										<li><a href="">关于公司设计数字化转型孵化运行的通知</a><span>05-20</span></li>
+										<li><a href="">关于开展内部集中宣讲的通知</a><span>05-20</span></li>
+										<li><a href="">关于BIM知识讲座</a><span>05-20</span></li>
+									</ul>
+								</div>
+							</div>-->
+						</div> 
+					</div>
+				</div>
+				<!-- 主体 结束 -->
+	
+ 			 <!-- banner 开始 -->
+				<div class="bottom_banner">
+					<ul>
+						<li class="right_border"><a href="">中国知网</a></li>
+						<li class="right_border"><a href="">国家知识产权局</a></li>
+						<li class="right_border"><a href="">北京市知识产权局</a></li>
+						<li class="right_border"><a href="">一机两用注册</a></li>
+						<li class="right_border"><a href="">二手机系统</a></li>
+						<li class="right_border"><a href="">安全管理平台</a></li>
+						<li class="right_border"><a href="">电子邮局</a></li>
+					</ul>
+				</div>
+				<!-- banner 结束 -->
+	
+				<!-- bottom 开始 -->
+				<div class="bottom">
+					COPYRIGHT版权所有 设计开发：首钢工程信息中心 来源: 模板之家
+				</div>
+				<!-- bottom 结束 -->
+	
+			</div>
+		</div>
+		<!-- main 结束 -->
+		<script src="js/bootstrap.bundle.min.js"></script>
+	</body>
+
+</html>
